@@ -35,3 +35,43 @@ export function ModeToggle() {
     </DropdownMenu>
   )
 }
+
+// return (
+
+//     <>
+//     <div className="w-full h-[600px] bg-green-400 top-[100px] mt-[90px]">
+
+//     <Swiper
+//   spaceBetween={20}
+//   slidesPerView={3}
+//   onSlideChange={() => console.log('slide change')}
+//   onSwiper={(swiper) => console.log(swiper)}
+
+// >
+//   <SwiperSlide></SwiperSlide>
+//   <SwiperSlide>Slide 2</SwiperSlide>
+//   <SwiperSlide>Slide 3</SwiperSlide>
+//   <SwiperSlide>Slide 4</SwiperSlide>
+//   ...
+// </Swiper>
+//     </div>
+//     </>
+// )
+{
+  /* {movies && movies.length > 0 ? (
+        movies.map((movie) => (
+            <SwiperSlide key={movie.id} className="flex items-center justify-center">
+          <img
+            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            alt={movie.title}
+            className=" w-full h-[600px]"
+            />
+            
+        </SwiperSlide>
+      ))
+    ) : (
+        <SwiperSlide className="flex items-center justify-center text-white">
+        Loading...
+      </SwiperSlide>
+    )} */
+}
