@@ -11,9 +11,9 @@ type Movie = {
   id: number;
   backdrop_path: string;
   original_title: string;
-  overview: string
-  vote_average: number
-  trailerUrl: string
+  overview: string;
+  vote_average: number;
+  trailerUrl: string;
 };
 
 export const SwiperSection = () => {
@@ -22,8 +22,6 @@ export const SwiperSection = () => {
   const apiKey = "db430a8098715f8fab36009f57dff9fb";
   const baseUrl = "https://api.themoviedb.org/3";
   const mainUrl = `${baseUrl}/movie/now_playing?language=en-US&page=1&api_key=${apiKey}`;
-
-  
 
   const getMovies = async () => {
     try {
@@ -49,13 +47,17 @@ export const SwiperSection = () => {
     try {
       const response = await fetch(trailerUrl);
       const result = await response.json();
-      const trailer = result.results.find((video: any) => video.type === "Trailer" && video.site === "YouTube");
+      const trailer = result.results.find(
+        (video: any) => video.type === "Trailer" && video.site === "YouTube"
+      );
       return trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : "#";
     } catch (error) {
       console.log("Error fetching trailer:", error);
       return "#";
     }
   };
+
+  // console.log(movies)
 
   useEffect(() => {
     getMovies();
@@ -76,20 +78,24 @@ export const SwiperSection = () => {
             key={movie.id}
             className="flex items-center justify-center"
           >
-            <div className="flex w-[20%] absolute flex-col justify-items-start p-5 space-y-4 pt-[150px] pl-[100px]">
-            <p className="text-sm">Now playing:</p>
-            <h1 className="text-2xl font-medium font-bold">{movie.original_title}</h1>
-            <p className="text-sm"> ⭐️{movie.vote_average}/10</p>
-            <p className="text-sm line-clamp-5 font-normal font-inter">{movie.overview}</p>
+            <div className="flex w-[20%] absolute flex-col justify-items-start p-5 space-y-4 pt-[150px] pl-[100px]  text-white">
+              <p className="text-sm">Now playing:</p>
+              <h1 className="text-2xl font-medium font-bold Light:text-white-200">
+                {movie.original_title}
+              </h1>
+              <p className="text-sm"> ⭐️{movie.vote_average}/10</p>
+              <p className="text-l line-clamp-5 font-normal font-inter">
+                {movie.overview}
+              </p>
 
-            <a
-              href={movie.trailerUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="object-contain bg-gray-600 text-white px-4 py-2 rounded-lg text-sm md:text-lg transition-all hover:bg-gray-700"
-            >
-              🎬 Watch Trailer
-            </a>
+              <a
+                href={movie.trailerUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" w-[170px] bg-gray-800 text-white px-4 py-2 rounded-xl text-sm md:text-lg transition-all hover:bg-gray-700"
+              >
+                🎬 Watch Trailer
+              </a>
             </div>
             <img
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
