@@ -2,7 +2,7 @@
 
 import { Key } from "lucide-react";
 import { useState, useEffect } from "react";
-
+import Link from "next/link";
 type Movie = {
   id: number;
   poster_path: string;
@@ -40,7 +40,9 @@ export const UpcomingSection = () => {
       <section className="w-full max-w-screen-xl bg-black-600 page-primary py-8 lg:py-13 space-y-8 lg:space-y-13 h-screen  m-auto">
         <div className="flex justify-between items-center">
           <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
-          <a className="text-foreground text-l font-semibold">See more...</a>
+          <Link href={`/category/upcoming`}>
+          <button className="text-foreground text-l font-semibold">See more...</button>
+          </Link>
         </div>
         <div className=" grid grid-flow-col grid-rows-2 gap-[20px]">
           {movies.slice(0, 10).map((movie) => (
