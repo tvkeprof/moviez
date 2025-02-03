@@ -22,7 +22,7 @@ export function GenreButton() {
           <a>Genre</a>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="grid grid-cols-3 gar-[10px] ml-[180px]">
+      <DropdownMenuContent className="grid grid-cols-3 gar-[10px] ml-[180px] bg-white dark:bg-[#09090B]">
         <DropdownMenuItem onClick={() => router.push("/category")}>
           Action
         </DropdownMenuItem>

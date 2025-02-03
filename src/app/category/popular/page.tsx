@@ -2,45 +2,41 @@
 
 import { FooterSection } from "@/components/footerSection";
 import { HeaderPage } from "@/components/headerPage";
-
+import { getPopular } from "@/lib/requests";
 import { useEffect, useState } from "react";
 type Movie = {
   id: number;
-  poster_path: string;
   vote_average: number;
   original_title: string;
+  poster_path: string;
 };
 const apiKey = process.env.API_KEY;
-
-const Upcoming = () => {
+const Popular = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-
   const baseUrl = "https://api.themoviedb.org/3";
-  const popularUrl = `${baseUrl}/movie/upcoming?language=en-US&page=${currentPage}&api_key=${apiKey}`;
+  const popularUrl = `${baseUrl}/movie/popular?language=en-US&page=${currentPage}&api_key=${apiKey}`;
 
   const getMovies = async () => {
     try {
       const response = await fetch(popularUrl);
       const result = await response.json();
       const movies = result.results;
-
       setMovies(movies);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
   useEffect(() => {
     getMovies();
   }, [currentPage]);
-
   return (
     <>
-      <div className="flex flex-col h- w-full">
+      <div className="flex flex-col w-full">
         <HeaderPage />
         <section className="w-full max-w-screen-xl bg-black-600 page-primary py-8 lg:py-13 space-y-8 lg:space-y-13  mt-[100px]  m-auto">
           <div className="flex justify-between items-center">
-            <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
+            <h3 className="text-foreground text-2xl font-semibold">Popular</h3>
             <button className="text-foreground text-l font-semibold">
               See more...
             </button>
@@ -66,12 +62,11 @@ const Upcoming = () => {
             {currentPage > 1 && (
               <button
                 onClick={() => setCurrentPage((prev) => prev - 1)}
-                className="h-9 w-16 bg-gray-700 text-white rounded-md"
+                className="w-16 h-9 bg-gray-700 text-white rounded-md"
               >
                 &lt; Back
               </button>
             )}
-
             {[1, 2, 3].map((page) => (
               <button
                 key={page}
@@ -99,5 +94,4 @@ const Upcoming = () => {
     </>
   );
 };
-
-export default Upcoming;
+export default Popular;

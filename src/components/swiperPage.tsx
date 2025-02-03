@@ -5,7 +5,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+
 
 type Movie = {
   id: number;
@@ -19,7 +19,7 @@ type Movie = {
 export const SwiperSection = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
-  const apiKey = "db430a8098715f8fab36009f57dff9fb";
+  const apiKey = process.env.API_KEY;
   const baseUrl = "https://api.themoviedb.org/3";
   const mainUrl = `${baseUrl}/movie/now_playing?language=en-US&page=1&api_key=${apiKey}`;
 
@@ -57,7 +57,7 @@ export const SwiperSection = () => {
     }
   };
 
-  // console.log(movies)
+  console.log(movies);
 
   useEffect(() => {
     getMovies();
@@ -65,7 +65,7 @@ export const SwiperSection = () => {
   console.log(movies);
 
   return (
-    <div className="w-full h-[600px] bg-green-400 mt-[90px] flex items-center">
+    <div className="w-full h-[600px] bg-green-400 mt-[90px] flex items-center bg-[#09090B]">
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={10}
