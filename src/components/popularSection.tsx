@@ -17,7 +17,7 @@ export const PopularSection = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const router = useRouter();
 
-  const apiKey = "db430a8098715f8fab36009f57dff9fb";
+  const apiKey = process.env.API_KEY;
   const baseUrl = "https://api.themoviedb.org/3";
   const popularUrl = `${baseUrl}/movie/popular?language=en-US&page=1&api_key=${apiKey}`;
 
