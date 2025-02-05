@@ -48,7 +48,7 @@ export const UpcomingSection = () => {
           {movies.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
-              className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"
+              className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl hover:bg-primary/30"
             >
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}

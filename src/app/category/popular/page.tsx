@@ -2,7 +2,6 @@
 
 import { FooterSection } from "@/components/footerSection";
 import { HeaderPage } from "@/components/headerPage";
-import { getPopular } from "@/lib/requests";
 import { useEffect, useState } from "react";
 type Movie = {
   id: number;
@@ -45,7 +44,7 @@ const Popular = () => {
             {movies.map((movie) => (
               <div
                 key={movie.id}
-                className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"
+                className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl hover:opacity-50"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -95,3 +94,5 @@ const Popular = () => {
   );
 };
 export default Popular;
+
+

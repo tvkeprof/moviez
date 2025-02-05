@@ -28,7 +28,7 @@ export const HeaderPage = () => {
               <DownArrow/>
               <GenreButton/>
             </div>
-            <div className="flex w-[300px] h-10 border border-[#E4E4E7] items-center rounded-[10px] p-[10px]">
+            <div className="">
               {/* <InputSearch /> */}
               <SearchMovie/>
               {/* <Input
