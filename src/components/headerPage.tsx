@@ -16,7 +16,7 @@ export const HeaderPage = () => {
   const router = useRouter ();
   return (
     <>
-      <header className="w-full fixed top-0 inset-x-0 z-20 h-[59px] bg-white dark:bg-[#09090B] flex items-center justify-center">
+      <header className="fixed top-0 left-0 w-full h-[60px] bg-white dark:bg-[#09090B] flex items-center justify-center shadow-md z-50">
         <div className="flex items-center justify-between w-full max-w-screen-xl px-5 lg:px-0">
           <button className="flex items-center gap-x-2 text-indigo-700"
           onClick={()=> router.push("/")}>

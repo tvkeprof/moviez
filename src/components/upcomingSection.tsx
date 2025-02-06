@@ -3,6 +3,7 @@
 import { Key } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 type Movie = {
   id: number;
   poster_path: string;
@@ -12,6 +13,7 @@ type Movie = {
 // /movie/upcoming?language=en-US&page=1
 export const UpcomingSection = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const router = useRouter();
 
   const apiKey = process.env.API_KEY;
   const baseUrl = "https://api.themoviedb.org/3";
@@ -49,13 +51,15 @@ export const UpcomingSection = () => {
             <div
               key={movie.id}
               className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl hover:bg-primary/30"
+              onClick={()=>router.push(`/category/movieDetail/${movie.id}`)}
+              
             >
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 className="w-[230px] h-[340px] rounded-xl"
               />
               <div className="p-[10px]">
-                <p className="text-l"> ⭐️{movie.vote_average}/10</p>
+                <p className="text-l"> ⭐️{movie.vote_average.toFixed(1)}/10</p>
                 <p className="text-xl">{movie.original_title}</p>
               </div>
             </div>
