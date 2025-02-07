@@ -51,7 +51,7 @@ const TopRated = () => {
                   className="w-[230px] h-[340px] rounded-xl"
                 />
                 <div className="p-[10px]">
-                  <p className="text-l"> ⭐️{movie.vote_average}/10</p>
+                  <p className="text-l"> ⭐️{movie.vote_average.toFixed(1)}/10</p>
                   <p className="text-xl">{movie.original_title}</p>
                 </div>
               </div>

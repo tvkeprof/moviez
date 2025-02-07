@@ -40,7 +40,7 @@ const SearchMovie = () => {
   }, [searchValue, page]);
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col items-center justify-center ">
       <input
         type="text"
         value={searchValue}
@@ -48,22 +48,29 @@ const SearchMovie = () => {
         className=" w-[300px] h-10 border border-[#E4E4E7] rounded-[10px] p-[10px]"
         placeholder="Search..."
       />
-      <div className="absolute top-[50px]">
+      <div className="absolute top-[50px] ">
         {filteredMovie.length > 0 && (
-          <ul className="border w-[500px] dark:bg-black bg-[#F4F4F5] cursor-pointer">
+          <ul 
+          className="border w-[600px] dark:bg-black bg-[#F4F4F5] cursor-pointer p-4 rounded-xl">
             {filteredMovie.slice(0, 5).map((movie) => (
               <Link href={`/category/movieDetail/${movie.id}`}>
-              
-              <div key={movie.id} className="py-2 border-b flex hover:bg-[#27272A] ">
+
+                <div className="flex justify-between items-end hover:bg-[#27272A] border-b rounded-xl">
+
+
+              <div key={movie.id} className="py-2 flex ">
                 <img
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   className="w-[80px] h-[100px] rounded-xl"
                 />
                 <div className="p-[10px]">
                   <p className="">{movie.title}</p>
-                  <p className="text-l">⭐️ {movie.vote_average}/10 </p>
+                  <p className="text-l">⭐️ {movie.vote_average.toFixed(1)}/10 </p>
                 </div>
               </div>
+              <button className="hover:border-b mb-4">See more..</button>
+                </div>
+              
               </Link>
 
             ))}

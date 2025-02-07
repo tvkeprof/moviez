@@ -52,13 +52,14 @@ export const PopularSection = () => {
             <div
               key={movie.id}
               className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"
+              onClick={()=>router.push(`/category/movieDetail/${movie.id}`)}
             >
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 className="w-[230px] h-[340px] rounded-xl"
               />
               <div className="p-[10px]">
-                <p className="text-l"> ⭐️{movie.vote_average}/10</p>
+                <p className="text-l"> ⭐️{movie.vote_average.toFixed(1)}/10</p>
                 <p className="text-xl">{movie.original_title}</p>
               </div>
             </div>
