@@ -1,12 +1,9 @@
 "use client";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
-
-
 type Movie = {
   id: number;
   backdrop_path: string;
@@ -15,33 +12,27 @@ type Movie = {
   vote_average: number;
   trailerUrl: string;
 };
-
 export const SwiperSection = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-
   const apiKey = process.env.API_KEY;
   const baseUrl = "https://api.themoviedb.org/3";
   const mainUrl = `${baseUrl}/movie/now_playing?language=en-US&page=1&api_key=${apiKey}`;
-
   const getMovies = async () => {
     try {
       const response = await fetch(mainUrl);
       const result = await response.json();
       const movies = result.results;
-
       const moviesWithTrailers = await Promise.all(
         movies.map(async (movie: Movie) => {
           const trailerUrl = await getMovieTrailer(movie.id);
           return { ...movie, trailerUrl };
         })
       );
-
       setMovies(moviesWithTrailers);
     } catch (error) {
       console.log(error);
     }
   };
-
   const getMovieTrailer = async (movieId: number) => {
     const trailerUrl = `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`;
     try {
@@ -63,7 +54,6 @@ export const SwiperSection = () => {
     getMovies();
   }, []);
   console.log(movies);
-
   return (
     <div className="w-full h-[600px] bg-green-400 mt-[90px] flex items-center bg-[#09090B]">
       <Swiper
@@ -87,7 +77,6 @@ export const SwiperSection = () => {
               <p className="text-l line-clamp-5 font-normal font-inter">
                 {movie.overview}
               </p>
-
               <a
                 href={movie.trailerUrl || "#"}
                 target="_blank"
@@ -109,5 +98,3 @@ export const SwiperSection = () => {
     </div>
   );
 };
-
-///movie/${id}/videos?language=en-US

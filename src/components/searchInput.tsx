@@ -10,7 +10,6 @@ type Movie = {
   title: string;
   vote_average: number;
   poster_path: string;
-
 };
 const SearchMovie = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -50,29 +49,25 @@ const SearchMovie = () => {
       />
       <div className="absolute top-[50px] ">
         {filteredMovie.length > 0 && (
-          <ul 
-          className="border w-[600px] dark:bg-black bg-[#F4F4F5] cursor-pointer p-4 rounded-xl">
+          <ul className="border w-[600px] dark:bg-black bg-[#F4F4F5] cursor-pointer p-4 rounded-xl">
             {filteredMovie.slice(0, 5).map((movie) => (
               <Link href={`/category/movieDetail/${movie.id}`}>
-
                 <div className="flex justify-between items-end hover:bg-[#27272A] border-b rounded-xl">
-
-
-              <div key={movie.id} className="py-2 flex ">
-                <img
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  className="w-[80px] h-[100px] rounded-xl"
-                />
-                <div className="p-[10px]">
-                  <p className="">{movie.title}</p>
-                  <p className="text-l">⭐️ {movie.vote_average.toFixed(1)}/10 </p>
+                  <div key={movie.id} className="py-2 flex ">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                      className="w-[80px] h-[100px] rounded-xl"
+                    />
+                    <div className="p-[10px]">
+                      <p className="">{movie.title}</p>
+                      <p className="text-l">
+                        ⭐️ {movie.vote_average.toFixed(1)}/10{" "}
+                      </p>
+                    </div>
+                  </div>
+                  <button className="hover:border-b mb-4">See more..</button>
                 </div>
-              </div>
-              <button className="hover:border-b mb-4">See more..</button>
-                </div>
-              
               </Link>
-
             ))}
           </ul>
         )}
