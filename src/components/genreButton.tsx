@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
@@ -42,12 +41,15 @@ export function GenreButton() {
       }
     };
     getGenres();
-  }, [genres]);
+  }, []);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>Genres</DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[580px] bg-white dark:bg-black p-4 ml-[-25px]" align="start">
+      <DropdownMenuContent
+        className="w-[580px] bg-white dark:bg-black p-4 ml-[-25px]"
+        align="start"
+      >
         <DropdownMenuLabel className="border-b mb-4 ">
           <p className="text-2xl font-semibold">Genres</p>
           <p className="font-normal mb-4">See lists of movies by genre</p>
@@ -57,7 +59,10 @@ export function GenreButton() {
           {genres.map((genre) => (
             <Link href={"/category/genres"}>
               <DropdownMenuItem key={genre.id}>
-                <p className="border rounded-full p-1 flex items-center">{genre.name}<ChevronRight/></p>
+                <p className="   p-1 flex items-center">
+                  {genre.name}
+                  <ChevronRight />
+                </p>
               </DropdownMenuItem>
             </Link>
           ))}
