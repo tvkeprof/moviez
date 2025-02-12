@@ -57,7 +57,7 @@ export function GenreButton() {
         <DropdownMenuSeparator />
         <div className="flex flex-wrap gap-3">
           {genres.map((genre) => (
-            <Link href={"/category/genres"}>
+            <Link href={`/category/genres?genreIds=${genre.id}`}>
               <DropdownMenuItem key={genre.id}>
                 <p className="   p-1 flex items-center">
                   {genre.name}
