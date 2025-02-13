@@ -5,23 +5,43 @@ import { HeaderPage } from "@/components/headerPage";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+// import PaginationD from "@/components/pagination";
+import { DynamicPagination } from "@/components/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { pages } from "next/dist/build/templates/app-page";
+
 type Genre = {
   id: number;
   name: string;
+};
+
+type Movie = {
+  id: number;
+  title: string;
+  vote_average: number;
+  poster_path: string;
 };
 const AllGenres = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const genreIds = searchParams.get("genreIds")?.split(",") || [];
   const [genres, setGenres] = useState<Genre[]>([]);
-  const [searchGenres, setSearchGenres] = useState([]);
+  const [searchGenres, setSearchGenres] = useState<Movie[]>([]);
   const apiKey = process.env.API_KEY;
   const baseUrl = "https://api.themoviedb.org/3";
   const genresUrl = `${baseUrl}/genre/movie/list?language=en&api_key=${apiKey}`;
   const [total, setTotal] = useState(0);
-
-  console.log(searchGenres);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     const getGenres = async () => {
@@ -39,6 +59,7 @@ const AllGenres = () => {
   const handleGenreClick = (genreId: number) => () => {
     const newParams = new URLSearchParams(searchParams);
     let newGenreIds = [...genreIds];
+    newParams.set("page", currentPage.toString());
 
     if (newGenreIds.includes(String(genreId))) {
       newGenreIds = newGenreIds.filter((id) => id !== String(genreId));
@@ -50,39 +71,51 @@ const AllGenres = () => {
     } else {
       newParams.delete("genreIds");
     }
-
     router.push(`?${newParams.toString()}`);
   };
 
   useEffect(() => {
-    if (genreIds.length === 0) {
-      setSearchGenres([]);
-      return;
-    }
     const genresSearchUrl = `${baseUrl}/discover/movie?language=en&with_genres=${genreIds.join(
       ","
-    )}&page=1&api_key=${apiKey}`;
+    )}&page=${currentPage}1&api_key=${apiKey}`;
 
     const getSearchGenres = async () => {
       try {
         const response = await fetch(genresSearchUrl);
         const result = await response.json();
-        console.log(result);
         setSearchGenres(result.results || []);
         setTotal(result.total_results);
+        setTotalPage(result.total_page);
       } catch (err) {
         console.log(err);
       }
     };
     getSearchGenres();
-  }, [searchParams]);
+  }, [searchParams, currentPage]);
+
+  console.log(searchGenres);
+
+  const updateCurrentPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const getPaginationRange = () => {
+    const startPage = Math.max(1, currentPage - 3);
+    const endPage = Math.min(totalPage, currentPage + 3);
+    const pages = [];
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full h-full justify-between">
       <HeaderPage />
-      <div className="w-full h-auto]">
+      <div className="">
         <div className="">
-          <div className="w-full h-auto max-w-screen-xl m-auto mt-[100px]">
+          <div className=" max-w-screen-xl m-auto mt-[100px]">
             <h1 className="mb-8 text-2xl font-semibold text-foreground lg:text-3xl">
               Search Filter
             </h1>
@@ -100,21 +133,22 @@ const AllGenres = () => {
                     onClick={handleGenreClick(genre.id)}
                     className=""
                   >
-                    <Badge variant="outline" className="flex gap-2 border-[#27272A]">
-
-                    <p className="text-xs">{genre.name}</p>
-                    <Checkbox
-                      className="w-4 h-4 rounded-full border-[#27272A]"
-                      id="terms1"
-                      id={`genre-${genre.id}`}
-                      checked={genreIds.includes(String(genre.id))}
-                    />
+                    <Badge
+                      variant="outline"
+                      className="flex gap-2 border-[#27272A]"
+                    >
+                      <p className="text-xs">{genre.name}</p>
+                      <Checkbox
+                        className="w-4 h-4 rounded-full border-[#27272A]"
+                        id={`genre-${genre.id}`}
+                        checked={genreIds.includes(String(genre.id))}
+                      />
                     </Badge>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="h-auto">
+            <div className="">
               <div className="shrink-0 bg-border border-[#27272A] w-[1px] hidden lg:block border h-full"></div>
             </div>
             <div className="w-full ">
@@ -152,6 +186,49 @@ const AllGenres = () => {
           </div>
         </div>
       </div>
+      <div>
+        <Pagination>
+          <PaginationContent>
+            {currentPage > 1 && (
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={() => updateCurrentPage(currentPage - 1)}
+                />
+              </PaginationItem>
+            )}
+{/* 
+            {currentPage > 4 && (
+              <>
+                <PaginationItem>
+                  <PaginationLink href="#" onClick={() => updateCurrentPage(1)}>
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+               
+              </>
+            )} */}
+            {[1,2,3,4,5,6,7,8,9,10].map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink
+                  href="#"
+                  onClick={() => updateCurrentPage(page)}
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() => updateCurrentPage(currentPage + 1)}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
+
       <FooterSection />
     </div>
   );

@@ -55,7 +55,7 @@ export const SwiperSection = () => {
   }, []);
   console.log(movies);
   return (
-    <div className="w-full h-[600px] bg-green-400 mt-[90px] flex items-center bg-[#09090B]">
+    <div className="w-full h-[600px] mt-[90px] flex items-center bg-[#09090B]">
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={10}
@@ -70,7 +70,7 @@ export const SwiperSection = () => {
           >
             <div className="flex w-[20%] absolute flex-col justify-items-start p-5 space-y-4 pt-[150px] pl-[100px]  text-white">
               <p className="text-sm">Now playing:</p>
-              <h1 className="text-2xl font-medium font-bold Light:text-white-200">
+              <h1 className="text-2xl font-bold Light:text-white-200">
                 {movie.original_title}
               </h1>
               <p className="text-sm"> ⭐️{movie.vote_average}/10</p>
@@ -89,7 +89,7 @@ export const SwiperSection = () => {
             <img
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.original_title}
-              className=" w-full h-[600px]"
+              className=" w-full h-[600px] object-cover"
             />
             {}
           </SwiperSlide>

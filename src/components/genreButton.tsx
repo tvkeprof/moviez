@@ -28,6 +28,7 @@ export function GenreButton() {
   const [genres, setGenres] = useState<Genre[]>([]);
   const baseUrl = "https://api.themoviedb.org/3";
   const genresUrl = `${baseUrl}/genre/movie/list?language=en&api_key=${apiKey}`;
+  const currentPage = 1
 
   useEffect(() => {
     const getGenres = async () => {
