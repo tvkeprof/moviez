@@ -23,7 +23,7 @@ export const HeaderPage = () => {
             <HeaderLogo />
             <h4 className="italic font-bold">Movie Z</h4>
           </button>
-          <div className="relative hidden lg:flex items-center gap-x-3">
+          <div className="relative hidden items-center gap-x-3 lg:flex">
             <div className="flex w-[120px] h-10 border border-[#E4E4E7] items-center rounded-[10px] p-[10px] ">
               <DownArrow/>
               <GenreButton/>

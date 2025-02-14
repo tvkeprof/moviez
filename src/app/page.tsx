@@ -10,7 +10,7 @@ import { FooterSection } from "@/components/footerSection";
 export default function Home() {
 
   return (
-    <div className="w-full h-screen bg-white-500 flex flex-col">
+    <div className="w-full h-full bg-white-500 flex flex-col">
       <HomePage/>
       <HeaderPage/>
       <SwiperSection/>

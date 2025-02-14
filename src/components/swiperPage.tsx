@@ -68,7 +68,7 @@ export const SwiperSection = () => {
             key={movie.id}
             className="flex items-center justify-center"
           >
-            <div className="flex w-[20%] absolute flex-col justify-items-start p-5 space-y-4 pt-[150px] pl-[100px]  text-white">
+            <div className="lg:flex w-[20%] hidden lg:visible absolute flex-col justify-items-start p-5 space-y-4 pt-[150px] pl-[100px]  text-white">
               <p className="text-sm">Now playing:</p>
               <h1 className="text-2xl font-bold Light:text-white-200">
                 {movie.original_title}
@@ -89,8 +89,30 @@ export const SwiperSection = () => {
             <img
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.original_title}
-              className=" w-full h-[600px] object-cover"
+              className=" w-full lg:h-[600px] h-[300px] object-cover"
             />
+            <div className="w-full h-[300px] flex flex-col gap-[15px] visible lg:hidden">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-sm">Now playing:</p>
+                  <h1 className="text-2xl font-bold Light:text-white-200">
+                    {movie.original_title}
+                  </h1>
+                </div>
+                <p className="text-sm"> ⭐️{movie.vote_average}/10</p>
+              </div>
+              <p className="text-l line-clamp-5 w-[50%] mt-[20px] font-normal font-inter">
+                {movie.overview}
+              </p>
+              <a
+                href={movie.trailerUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" w-[170px]  bg-gray-800 text-white px-4 py-2 rounded-xl text-sm md:text-lg transition-all hover:bg-gray-700"
+              >
+                🎬 Watch Trailer
+              </a>
+            </div>
             {}
           </SwiperSlide>
         ))}
