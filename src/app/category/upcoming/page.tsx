@@ -46,7 +46,7 @@ const Upcoming = () => {
             </button>
           </div>
           <div className=" grid grid-flow-col grid-rows-4 gap-[20px]">
-            {movies.map((movie) => (
+            {movies?.map((movie) => (
               <div
                 key={movie.id}
                 className="w-[230px] h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"

@@ -40,15 +40,19 @@ export const TopRatedSection = () => {
       <section className="w-full max-w-screen-xl bg-black-600 page-primary py-8 lg:py-13 space-y-8 lg:space-y-13 h-auto  m-auto">
         <div className="flex justify-between items-center">
           <h3 className="text-foreground text-2xl font-semibold">Top Rated</h3>
-          <button onClick={()=> router.push("category/topRated")} 
-           className="text-foreground text-l font-semibold">See more...</button>
+          <button
+            onClick={() => router.push("category/topRated")}
+            className="text-foreground text-l font-semibold"
+          >
+            See more...
+          </button>
         </div>
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 gap-[20px] md:grid-cols-3 sm:grid-cols-2">
-          {movies.slice(0, 10).map((movie) => (
+          {movies?.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
               className="w-[158px] h-[340px]  lg:w-[230px] lg:h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"
-              onClick={()=>router.push(`/category/movieDetail/${movie.id}`)}
+              onClick={() => router.push(`/category/movieDetail/${movie.id}`)}
             >
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}

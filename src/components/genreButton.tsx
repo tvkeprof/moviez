@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -15,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@radix-ui/react-dropdown-menu";
-import { Badge, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 type Genre = {
   id: number;
@@ -28,7 +27,7 @@ export function GenreButton() {
   const [genres, setGenres] = useState<Genre[]>([]);
   const baseUrl = "https://api.themoviedb.org/3";
   const genresUrl = `${baseUrl}/genre/movie/list?language=en&api_key=${apiKey}`;
-  const currentPage = 1
+  const currentPage = 1;
 
   useEffect(() => {
     const getGenres = async () => {
@@ -57,7 +56,7 @@ export function GenreButton() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <div className="flex flex-wrap gap-3">
-          {genres.map((genre) => (
+          {genres?.map((genre) => (
             <Link href={`/category/genres?genreIds=${genre.id}`}>
               <DropdownMenuItem key={genre.id}>
                 <p className="   p-1 flex items-center">

@@ -1,6 +1,5 @@
 "use client";
 
-import { Key } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,16 +42,17 @@ export const UpcomingSection = () => {
         <div className="flex items-center justify-between">
           <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
           <Link href={`/category/upcoming`}>
-          <button className="text-foreground text-l font-semibold">See more...</button>
+            <button className="text-foreground text-l font-semibold">
+              See more...
+            </button>
           </Link>
         </div>
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 gap-[20px] md:grid-cols-3 sm:grid-cols-2">
-          {movies.slice(0, 10).map((movie) => (
+          {movies?.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
               className="w-[158px] h-[340px]  lg:w-[230px] lg:h-[440px] dark:bg-[#27272A] bg-[#F4F4F5] gap-[10px] rounded-xl"
-              onClick={()=>router.push(`/category/movieDetail/${movie.id}`)}
-              
+              onClick={() => router.push(`/category/movieDetail/${movie.id}`)}
             >
               <img
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
